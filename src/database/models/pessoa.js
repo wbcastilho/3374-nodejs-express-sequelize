@@ -26,6 +26,18 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Pessoa',
     tableName: 'pessoas',
     paranoid: true,
+    defaultScope: {
+      // Escopo global que irá exibir apenas as pessoas onde ativo==true nas consultas por padrão
+      where: {
+        ativo: true
+      }
+    },
+    scopes: {
+      // Escopo criado para exibir todas as pessoas independnete se ativo==true ou ativo==false
+      todosOsRegistros: {
+        where: {}
+      }
+    }
   });
   return Pessoa;
 };
